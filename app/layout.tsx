@@ -22,7 +22,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={`antialiased min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 ${inter.className}`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <div className="max-w-2xl mx-auto py-10 px-4">
             <header>
               <div className="flex items-center justify-between">

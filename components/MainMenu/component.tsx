@@ -153,7 +153,7 @@ export function MainMenu() {
     <NavigationMenu>
       <NavigationMenuList>
         <AboutMeItem title={navigationOptions[1].title} href={navigationOptions[1].href} description={navigationOptions[1].description} />
-        <NavigationMenuItem>
+        {/* <NavigationMenuItem>
           <NavigationMenuTrigger>Projects</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
@@ -168,14 +168,14 @@ export function MainMenu() {
               ))}
             </ul>
           </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
+        </NavigationMenuItem> */}
+        {/* <NavigationMenuItem>
           <Link href="/docs" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Documentation
             </NavigationMenuLink>
           </Link>
-        </NavigationMenuItem>
+        </NavigationMenuItem> */}
       </NavigationMenuList>
     </NavigationMenu>
   )

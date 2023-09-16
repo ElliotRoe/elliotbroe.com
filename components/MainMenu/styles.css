@@ -10,6 +10,10 @@
   @apply border border-gray-200 rounded-md;
 }
 
+.text-theme-gradient {
+  @apply bg-gradient-to-r from-slate-900 to-slate-700 dark:from-neutral-300 dark:to-stone-300 bg-clip-text text-transparent;
+}
+
 .section-header {
-  @apply text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent;
+  @apply text-2xl font-bold text-theme-gradient;
 }
