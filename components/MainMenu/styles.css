@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.item-hover {
+  @apply hover:shadow-md hover:border-inherit hover:bg-accent hover:text-accent-foreground transition;
+}
+
+.item-outline {
+  @apply border border-gray-200 rounded-md;
+}
+
+.section-header {
+  @apply text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent;
+}
