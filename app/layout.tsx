@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@/components/analytics"
 import { ModeToggle } from "@/components/mode-toggle"
 import { MainMenu } from "@/components/MainMenu/component"
+import { GithubButton, LinkedInButton } from "@/components/social-button"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -26,7 +27,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <div className="max-w-2xl mx-auto py-10 px-4">
             <header>
               <div className="flex items-center justify-between">
-                <ModeToggle />
+                <div className="flex flex-row">
+                  <ModeToggle />
+                  <GithubButton />
+                  <LinkedInButton />
+                </div>
                 <MainMenu />
               </div>
             </header>
