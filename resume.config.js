@@ -1,0 +1,36 @@
+export const organizations = [
+    "BX Coding", 
+    "Play and Learn Lab", 
+    "Independent", 
+    "Honeywell", 
+    "The Technique", 
+    "Wreck Techs GT"]
+export const tags = [
+    "Build", 
+    "Design", 
+    "Learn", 
+    "Research", 
+    "Teach", 
+    "Write"]
+export const skills = [
+    "Docker", 
+    "Git", 
+    "HTML", 
+    "JavaScript", 
+    "LaTeX", 
+    "Node.js", 
+    "Python", 
+    "React", 
+    "SQL", 
+    "TypeScript", 
+    "Verilog", 
+    "Pyodide",
+    "Airflow",
+    "AWS",
+    "Typescript",
+    "Firebase",
+    "Java", 
+    "TailwindCSS",
+    "Figma",
+    "Next.js",
+]

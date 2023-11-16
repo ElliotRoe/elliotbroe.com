@@ -1,4 +1,5 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files"
+import { organizations, skills, tags } from "./resume.config"
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
@@ -57,12 +58,37 @@ export const Project = defineDocumentType(() => ({
       type: "string",
       required: true,
     },
-    icon: {
-      type: "string",
-      required: true,
-    },
     description: {
       type: "string",
+    },
+    icon: {
+      type: "string",
+      required: false,
+    },
+    link: {
+      type: "string",
+      required: false,
+    },
+    organization: {
+      type: "enum",
+      options: organizations,
+      required: false,
+    },
+    tags: {
+      type: "list",
+      of: {
+        type: "enum",
+        options: tags,
+      },
+      required: true,
+    },
+    skills: {
+      type: "list",
+      of: {
+        type: "enum",
+        options: skills,
+      },
+      required: true,
     },
   },
   computedFields,
@@ -78,7 +104,8 @@ export const Experience = defineDocumentType(() => ({
       required: true,
     },
     organization: {
-      type: "string",
+      type: "enum",
+      options: organizations,
       required: true,
     },
     logoPath: {
@@ -95,7 +122,7 @@ export const Experience = defineDocumentType(() => ({
     },
     endDate: {
       type: "string",
-      required: true,
+      required: false,
     },
   },
   computedFields,

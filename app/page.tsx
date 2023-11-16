@@ -5,8 +5,9 @@ import { Mdx } from "@/components/mdx-components"
 import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import Image from "next/image"
 import React from "react"
+import { LinkHover } from "@/components/link-hover"
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
@@ -60,11 +61,31 @@ const ListRole = React.forwardRef<
 ListRole.displayName = "ListRole"
 
 export default function Home() {
+  const designProject = allProjects.filter((project) => project.title === "Educational AI K-12 Games")[0]
+  const buildProject = allProjects.filter((project) => project.title === "Prompt Ed")[0]
+  const teachProject = allProjects.filter((project) => project.title === "Patch")[0]
+
+  const design = <LinkHover href={designProject.slug} description={designProject.title} icon={designProject.icon}>design</LinkHover>
+  const build = <LinkHover href={buildProject.slug ?? "#"} description={buildProject.title} icon={buildProject.icon}>build</LinkHover>
+  const teach = <LinkHover href={teachProject.slug ?? "#"} description={teachProject.title} icon={teachProject.icon}>teach</LinkHover>
+
   return (
     <div className="prose dark:prose-invert">
-      <div className="flex flex-col justify-between m-10 p-10 item-outline">
-        <p><span className="text-9xl font-black text-theme-gradient">Hi!</span></p>
-        <p>{`I'm Elliot Roe and I love to design, build, and teach things.`}</p>
+      <div className="flex flex-row m-10 item-outline">
+        <div className="w-[250px] relative -left-7">
+          <Image
+            src="/headshot-nb-r.png" 
+            alt="headshot"   
+            fill
+            style={{
+              objectFit: 'contain',
+            }}
+          />
+        </div>
+        <div className="flex flex-col items-start p-10 pl-0">
+          <p><span className="text-9xl font-black text-theme-gradient">Hi!</span></p>
+          <p>I&#39;m Elliot Roe and I love to {design}, {build}, and {teach} things.</p>
+        </div>
       </div>
       {allPages.map((page) => (
         <article key={page._id}>
