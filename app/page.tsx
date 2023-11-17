@@ -72,7 +72,7 @@ export default function Home() {
   return (
     <div className="prose dark:prose-invert">
       <div className="flex flex-row m-10 item-outline">
-        <div className="w-[250px] relative -left-7">
+        <div className="w-[250px] relative -left-7 max-sm:hidden">
           <Image
             src="/headshot-nb-r.png" 
             alt="headshot"   
@@ -82,7 +82,7 @@ export default function Home() {
             }}
           />
         </div>
-        <div className="flex flex-col items-start p-10 pl-0">
+        <div className="flex flex-col items-start p-10 pl-0 max-sm:pl-10">
           <p><span className="text-9xl font-black text-theme-gradient">Hi!</span></p>
           <p>I&#39;m Elliot Roe and I love to {design}, {build}, and {teach} things.</p>
         </div>
