@@ -122,8 +122,8 @@ export default function Home() {
   const aboutArticle = allPages.filter((page) => page.title === "About")[0];
 
   return (
-    <div className="prose dark:prose-invert space-y-6 flex flex-col items-center">
-      <div className="flex flex-row my-5 item-outline w-[580px] mx-auto">
+    <div className="prose dark:prose-invert space-y-6 flex flex-col items-center w-full h-full">
+      <div className="flex flex-row my-5 item-outline max-w-[580px] mx-auto">
         <div className="w-[250px] relative -left-7 max-sm:hidden">
           <Image
             src="/headshot-nb-r.png"
@@ -147,7 +147,7 @@ export default function Home() {
       <article>
         <Mdx code={aboutArticle.body.code} />
       </article>
-      <div className="grid grid-cols-3 grid-rows-3 gap-4 w-full">
+      <div className="flex flex-col h-full sm:grid sm:grid-cols-3 sm:grid-rows-3 sm:gap-4">
         <WideCard
           className="col-span-2 row-span-2"
           experience={highlightedExperiences[0]}
@@ -159,11 +159,11 @@ export default function Home() {
           experience={highlightedExperiences[2]}
         />
         <SmallCard
-          className="col-span-1 row-span-1"
+          className="sm:col-span-1 sm:row-span-1 max-sm:h-16"
           experience={highlightedExperiences[1]}
         />
         <SmallCard
-          className="col-span-1 row-span-1"
+          className="sm:  col-span-1 sm:row-span-1 max-sm:h-16"
           experience={highlightedExperiences[3]}
         />
       </div>

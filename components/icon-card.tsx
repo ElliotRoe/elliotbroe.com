@@ -12,7 +12,7 @@ type IconCardProps = {
 export const IconCard: FC<IconCardProps> = ({ experience, className }) => {
   return (
     <div
-      className={`mt-4 card flex flex-col justify-center items-center border rounded-md space-y-2 ${className}`}
+      className={`mt-4 card flex flex-col p-5 justify-center items-center border rounded-md space-y-2 ${className}`}
     >
       <div className="w-32 h-32 relative">
         <Image
@@ -22,7 +22,7 @@ export const IconCard: FC<IconCardProps> = ({ experience, className }) => {
           className="rounded-xl"
         />
       </div>
-      <div className="text-2xl font-bold leading-none">
+      <div className="text-2xl font-bold leading-none text-center">
         {experience.position}
       </div>
       <div className="text-md italic leading-none">

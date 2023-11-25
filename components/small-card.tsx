@@ -13,9 +13,9 @@ type SmallCardProps = {
 export const SmallCard: FC<SmallCardProps> = ({ experience, className }) => {
   return (
     <div
-      className={`mt-4 card flex flex-row justify-start items-center border rounded-md space-x-2 ${className}`}
+      className={`mt-4 card flex flex-row justify-center items-center border rounded-md space-x-2 ${className}`}
     >
-      <div className="w-2/3 h-full p-5">
+      <div className="flex items-center justify-center w-2/3 h-full p-5">
         <div className="text-md font-bold leading-none">
           {experience.position}
         </div>
@@ -27,7 +27,9 @@ export const SmallCard: FC<SmallCardProps> = ({ experience, className }) => {
           alt="BxCoding"
           fill
           className="rounded-md rounded-l-none"
-          style={{ objectFit: "cover" }}
+          style={{
+            objectFit: "contain",
+          }}
         />
       </div>
     </div>
