@@ -15,5 +15,5 @@
 }
 
 .section-header {
-  @apply text-2xl font-bold text-theme-gradient;
+  @apply text-3xl font-bold text-theme-gradient;
 }

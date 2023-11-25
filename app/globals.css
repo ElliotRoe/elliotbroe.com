@@ -1,76 +1,82 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
-    --background: #FFFFFF;
-    --foreground: #0A0A0A;
+    --background: #ffffff;
+    --foreground: #0a0a0a;
 
-    --card: #FFFFFF;
-    --card-foreground: #0A0A0A;
- 
-    --popover: #FFFFFF;
-    --popover-foreground: #0A0A0A;
- 
-    --primary: #1A1A1A;
-    --primary-foreground: #F2F2F2;
- 
-    --secondary: #F5F5F5;
-    --secondary-foreground: #1A1A1A;
- 
-    --muted: #F5F5F5;
+    --card: #ffffff;
+    --card-foreground: #0a0a0a;
+
+    --popover: #ffffff;
+    --popover-foreground: #0a0a0a;
+
+    --primary: #1a1a1a;
+    --primary-foreground: #f2f2f2;
+
+    --secondary: #f5f5f5;
+    --secondary-foreground: #1a1a1a;
+
+    --muted: #f5f5f5;
     --muted-foreground: #737373;
- 
-    --accent: #F5F5F5;
-    --accent-foreground: #1A1A1A;
- 
-    --destructive: #D35400;
-    --destructive-foreground: #F2F2F2;
 
-    --border: #E5E5E5;
-    --input: #E5E5E5;
-    --ring: #0A0A0A;
- 
+    --accent: #f5f5f5;
+    --accent-foreground: #1a1a1a;
+
+    --destructive: #d35400;
+    --destructive-foreground: #f2f2f2;
+
+    --border: #e5e5e5;
+    --input: #e5e5e5;
+    --ring: #0a0a0a;
+
     --radius: 0.5rem;
   }
- 
+
   .dark {
-    --background: #0A0A0A;
-    --foreground: #F2F2F2;
- 
-    --card: #0A0A0A;
-    --card-foreground: #F2F2F2;
- 
-    --popover: #0A0A0A;
-    --popover-foreground: #F2F2F2;
- 
-    --primary: #F2F2F2;
-    --primary-foreground: #1A1A1A;
- 
+    --background: #0a0a0a;
+    --foreground: #f2f2f2;
+
+    --card: #0a0a0a;
+    --card-foreground: #f2f2f2;
+
+    --popover: #0a0a0a;
+    --popover-foreground: #f2f2f2;
+
+    --primary: #f2f2f2;
+    --primary-foreground: #1a1a1a;
+
     --secondary: #262626;
-    --secondary-foreground: #F2F2F2;
- 
+    --secondary-foreground: #f2f2f2;
+
     --muted: #262626;
-    --muted-foreground: #A1A1A1;
- 
+    --muted-foreground: #a1a1a1;
+
     --accent: #262626;
-    --accent-foreground: #F2F2F2;
- 
-    --destructive: #E74C3C;
-    --destructive-foreground: #F2F2F2;
- 
+    --accent-foreground: #f2f2f2;
+
+    --destructive: #e74c3c;
+    --destructive-foreground: #f2f2f2;
+
     --border: #262626;
     --input: #262626;
-    --ring: #D9D9D9;
+    --ring: #d9d9d9;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-card text-card-foreground;
   }
 }
