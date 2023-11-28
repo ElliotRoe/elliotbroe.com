@@ -168,7 +168,7 @@ export default function Home() {
         />
       </div>
       <Link href="/experiences">
-        <Button>Learn More</Button>
+        <Button>All Experiences</Button>
       </Link>
     </div>
   );
