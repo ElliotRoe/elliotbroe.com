@@ -13,7 +13,6 @@ type SmallCardProps = {
 
 export const SmallCard: FC<SmallCardProps> = ({ experience, className }) => {
   const [squareRef, { height }] = useElementSize();
-  console.log(height);
 
   return (
     <div
