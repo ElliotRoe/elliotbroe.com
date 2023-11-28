@@ -83,7 +83,7 @@ export default function Home() {
 
   const design = (
     <LinkHover
-      href={designProject.slug ?? "#"}
+      href={"https://www.playandlearnlab.com/ai-games"}
       description={designProject.title}
       icon={designProject.icon}
     >
@@ -92,7 +92,7 @@ export default function Home() {
   );
   const build = (
     <LinkHover
-      href={buildProject.slug ?? "#"}
+      href={"https://prompt-ed.org"}
       description={buildProject.title}
       icon={buildProject.icon}
     >
@@ -101,9 +101,9 @@ export default function Home() {
   );
   const teach = (
     <LinkHover
-      href={teachProject.slug ?? "#"}
-      description={teachProject.title}
-      icon={teachProject.icon}
+      href={"https://bxcoding.org"}
+      description={"Summer instructor at BX Coding"}
+      icon={"/icons/bxcoding-icon.png"}
     >
       teach
     </LinkHover>
