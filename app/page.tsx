@@ -122,7 +122,7 @@ export default function Home() {
   const aboutArticle = allPages.filter((page) => page.title === "About")[0];
 
   return (
-    <div className="prose dark:prose-invert space-y-6 flex flex-col items-center w-full h-full">
+    <div className="prose dark:prose-invert space-y-6 flex flex-col items-center w-full h-full pb-10">
       <div className="flex flex-row my-5 item-outline max-w-[580px] mx-auto">
         <div className="w-[250px] relative -left-7 max-sm:hidden">
           <Image

@@ -1,5 +1,6 @@
 import { Experience } from "@/.contentlayer/generated";
 import { Separator } from "@/components/ui/separator";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, useState } from "react";
@@ -13,8 +14,15 @@ type SmallCardProps = {
 export const SmallCard: FC<SmallCardProps> = ({ experience, className }) => {
   return (
     <div
-      className={`mt-4 card flex flex-row justify-center items-center border rounded-md space-x-2 ${className}`}
+      className={`mt-4 card flex flex-row justify-center items-center border rounded-md ${className}`}
     >
+      <Link
+        className="px-2 h-full flex items-center hover:bg-muted transition-colors duration-200 ease-in-out"
+        href={experience.slug}
+      >
+        <InfoCircledIcon />
+      </Link>
+      <Separator orientation="vertical" className="h-full" />
       <div className="flex items-center justify-center w-2/3 h-full p-5">
         <div className="text-md font-bold leading-none">
           {experience.position}
