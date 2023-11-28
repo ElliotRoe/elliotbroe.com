@@ -47,7 +47,7 @@ export const WideCard: FC<WideCardProps> = ({
           </div>
           <div className="text-md leading-none my-5">{content}</div>
           <Link href={experience.slug}>
-            <Button variant="default">
+            <Button variant="outline">
               <span className="text-sm px-2">Learn more</span>
               <InfoCircledIcon />
             </Button>
