@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
-import { InfoCircledIcon } from "@radix-ui/react-icons";
+import { ExternalLinkIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { SkillChip } from "@/components/skill-chip";
 
@@ -96,11 +96,11 @@ export const columns: ColumnDef<Project>[] = [
       const project = row.original;
 
       return (
-        <Link href={project.slug}>
+        <a target="_blank" href={project.link ?? "#"}>
           <div className="p-2">
-            <InfoCircledIcon />
+            <ExternalLinkIcon />
           </div>
-        </Link>
+        </a>
       );
     },
   },

@@ -1,79 +1,85 @@
-import { notFound } from "next/navigation"
-import { allExperiences } from "contentlayer/generated"
+import { notFound } from "next/navigation";
+import { allExperiences } from "contentlayer/generated";
 
-import { Metadata } from "next"
-import { Mdx } from "@/components/mdx-components"
-import Image from "next/image"
-import "./styles.css"
+import { Metadata } from "next";
+import { Mdx } from "@/components/mdx-components";
+import Image from "next/image";
+import "./styles.css";
 
 interface ExperienceProps {
   params: {
-    slug: string[]
-  }
+    slug: string[];
+  };
 }
 
 async function getPostFromParams(params: ExperienceProps["params"]) {
-  const slug = params?.slug?.join("/")
-  const experience = allExperiences.find((experience) => experience.slugAsParams === slug)
+  const slug = params?.slug?.join("/");
+  const experience = allExperiences.find(
+    (experience) => experience.slugAsParams === slug
+  );
 
   if (!experience) {
-    null
+    null;
   }
 
-  return experience
+  return experience;
 }
 
 export async function generateMetadata({
   params,
 }: ExperienceProps): Promise<Metadata> {
-  const experience = await getPostFromParams(params)
+  const experience = await getPostFromParams(params);
 
   if (!experience) {
-    return {}
+    return {};
   }
 
   return {
     title: experience.position,
     description: experience.position,
-  }
+  };
 }
 
-export async function generateStaticParams(): Promise<ExperienceProps["params"][]> {
+export async function generateStaticParams(): Promise<
+  ExperienceProps["params"][]
+> {
   return allExperiences.map((experience) => ({
     slug: experience.slugAsParams.split("/"),
-  }))
+  }));
 }
 
 export default async function ExperiencePage({ params }: ExperienceProps) {
-  const experience = await getPostFromParams(params)
+  const experience = await getPostFromParams(params);
 
   if (!experience) {
-    notFound()
+    notFound();
   }
 
   //ex: https://www.linkedin.com/in/elliot-roe-1b1a1b1b/ -> linkedin.com
   const extractDomain = (websiteLink: string) => {
-    const websiteLinkArray = websiteLink.split("/")
-    const websiteLinkDomain = websiteLinkArray[2]
-    return websiteLinkDomain
-  }
+    const websiteLinkArray = websiteLink.split("/");
+    const websiteLinkDomain = websiteLinkArray[2];
+    return websiteLinkDomain;
+  };
 
   return (
     <article className="py-6 prose dark:prose-invert">
-      <div className="flex flex-row justify-between p-10 item-outline">
+      <div className="flex flex-row justify-between p-10 card">
         <a href={experience.websiteLink}>
           <div className="flex flex-col items-center justify-center">
-              <div className="h-20 w-20 border-0 rounded-md overflow-hidden">
-                <Image 
-                  src={experience.logoPath}
-                  alt="headshot"   
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  style={{ width: 'auto', height: '100%', margin: 0 }}
-                />
-              </div>
-              <p className="text-xs italic text-slate-700">{extractDomain(experience.websiteLink)}</p>
+            <div className="h-20 w-20 border-0 rounded-md overflow-hidden">
+              <Image
+                src={experience.logoPath}
+                alt="headshot"
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: "auto", height: "100%", margin: 0 }}
+              />
+            </div>
+            <p className="text-xs italic text-slate-700">
+              {extractDomain(experience.websiteLink)}
+            </p>
           </div>
         </a>
         <div className="flex flex-col items-center justify-center">
@@ -84,16 +90,14 @@ export default async function ExperiencePage({ params }: ExperienceProps) {
           <p className="text-xl mt-0 text-slate-700 dark:text-slate-200">
             {experience.startDate}
           </p>
+          <p className="text-xl mt-0 text-slate-700 dark:text-slate-200">to</p>
           <p className="text-xl mt-0 text-slate-700 dark:text-slate-200">
-            to
-          </p>
-          <p className="text-xl mt-0 text-slate-700 dark:text-slate-200">
-          {experience?.endDate ? experience.endDate : "Present"}
+            {experience?.endDate ? experience.endDate : "Present"}
           </p>
         </div>
       </div>
       <hr className="my-4" />
       <Mdx code={experience.body.code} />
     </article>
-  )
+  );
 }
