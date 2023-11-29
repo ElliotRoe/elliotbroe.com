@@ -16,7 +16,7 @@ export const SmallCard: FC<SmallCardProps> = ({ experience, className }) => {
 
   return (
     <div
-      className={`mt-4 card flex flex-row justify-between items-center border rounded-md ${className}`}
+      className={`mt-4 card flex flex-row justify-between items-center ${className}`}
     >
       <div className="h-full flex flex-row">
         <Link

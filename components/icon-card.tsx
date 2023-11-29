@@ -15,7 +15,7 @@ type IconCardProps = {
 export const IconCard: FC<IconCardProps> = ({ experience, className }) => {
   return (
     <div
-      className={`mt-4 card flex flex-col p-5 justify-between items-center border rounded-md space-y-2 ${className}`}
+      className={`mt-4 card flex flex-col p-5 justify-between items-center space-y-2 ${className}`}
     >
       <div className="w-32 h-32 relative">
         <Image

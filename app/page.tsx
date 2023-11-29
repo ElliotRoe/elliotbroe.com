@@ -123,7 +123,7 @@ export default function Home() {
 
   return (
     <div className="prose dark:prose-invert space-y-6 flex flex-col items-center w-full h-full pb-10">
-      <div className="flex flex-row my-5 item-outline max-w-[580px] mx-auto">
+      <div className="flex flex-row my-5 card bg-background max-w-[580px] mx-auto">
         <div className="w-[250px] relative -left-7 max-sm:hidden">
           <Image
             src="/headshot-nb-r.png"

@@ -22,7 +22,7 @@ export const WideCard: FC<WideCardProps> = ({
 }) => {
   return (
     <div
-      className={`mt-4 card flex flex-row justify-start items-center border rounded-md space-x-2 ${className}`}
+      className={`mt-4 card flex flex-row justify-start items-center space-x-2 ${className}`}
     >
       <div className="w-2/3 h-full flex flex-row items-center justify-center">
         <div className="flex flex-col p-5">

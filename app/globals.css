@@ -77,6 +77,10 @@
 
 @layer components {
   .card {
-    @apply bg-card text-card-foreground;
+    @apply bg-card text-card-foreground border rounded-lg shadow-sm;
+  }
+
+  .bg-dotted {
+    @apply bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px];
   }
 }
