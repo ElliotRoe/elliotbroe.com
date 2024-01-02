@@ -7,7 +7,7 @@ import {
   allExperiences,
 } from "@/.contentlayer/generated";
 import { Mdx } from "@/components/mdx-components";
-import { cn } from "@/lib/utils";
+import { CommitInfo, cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -18,6 +18,7 @@ import { WideCard } from "@/components/wide-card";
 import { IconCard } from "@/components/icon-card";
 import { SmallCard } from "@/components/small-card";
 import Link from "next/link";
+import { useFetch } from "usehooks-ts";
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
@@ -121,28 +122,42 @@ export default function Home() {
 
   const aboutArticle = allPages.filter((page) => page.title === "About")[0];
 
+  const repoCommitApiUrl =
+    "https://api.github.com/repos/ElliotRoe/elliotbroe.com/commits?per_page=1";
+
+  const { data, error } = useFetch<CommitInfo[]>(repoCommitApiUrl);
+
   return (
     <div className="prose dark:prose-invert space-y-6 flex flex-col items-center w-full h-full pb-10">
-      <div className="flex flex-row my-5 card bg-background max-w-[580px] mx-auto">
-        <div className="w-[250px] relative -left-7 max-sm:hidden">
-          <Image
-            src="/headshot-nb-r.png"
-            alt="headshot"
-            fill
-            style={{
-              objectFit: "contain",
-            }}
-          />
+      <div className="my-5">
+        <div className="flex flex-row card bg-background max-w-[580px] mx-auto">
+          <div className="w-[250px] relative -left-7 max-sm:hidden">
+            <Image
+              src="/headshot-nb-r.png"
+              alt="headshot"
+              fill
+              style={{
+                objectFit: "contain",
+              }}
+            />
+          </div>
+          <div className="flex flex-col items-start justify-between p-10 pl-0 max-sm:pl-10">
+            <p>
+              <span className="text-9xl font-black text-theme-gradient">
+                Hi!
+              </span>
+            </p>
+            <p>
+              I&#39;m Elliot Roe and I love to {design}, {build}, and {teach}{" "}
+              things.
+            </p>
+          </div>
         </div>
-        <div className="flex flex-col items-start p-10 pl-0 max-sm:pl-10">
-          <p>
-            <span className="text-9xl font-black text-theme-gradient">Hi!</span>
-          </p>
-          <p>
-            I&#39;m Elliot Roe and I love to {design}, {build}, and {teach}{" "}
-            things.
-          </p>
-        </div>
+        <p className="text-sm italic text-muted-foreground my-1">{`Last Updated: ${
+          data
+            ? new Date(data[0].commit.author.date).toLocaleDateString()
+            : "-----"
+        }`}</p>
       </div>
       <article>
         <Mdx code={aboutArticle.body.code} />
