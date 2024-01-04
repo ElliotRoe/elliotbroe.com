@@ -17,7 +17,6 @@ export const skills = [
   "Python",
   "React",
   "SQL",
-  "TypeScript",
   "Verilog",
   "Pyodide",
   "Airflow",

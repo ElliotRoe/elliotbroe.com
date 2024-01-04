@@ -29,7 +29,6 @@ const SkillIcons: Record<Skill, ReactElement | undefined> = {
   LaTeX: undefined,
   "Node.js": undefined,
   Python: <PythonIcon />,
-  React: undefined,
   SQL: undefined,
   Verilog: undefined,
   Pyodide: <PythonIcon />,
