@@ -1,7 +1,7 @@
 import React from "react";
 
 const VerseVideoPage = () => {
-  const videoId = "dQw4w9WgXcQ"; // Replace with your desired YouTube video ID
+  const videoId = "g36y2hQPvsA"; // Replace with your desired YouTube video ID
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
