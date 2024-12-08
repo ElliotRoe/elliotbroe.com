@@ -11,7 +11,7 @@ import { CommitInfo, cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { LinkHover } from "@/components/link-hover";
 import { Separator } from "@/components/ui/separator";
 import { WideCard } from "@/components/wide-card";
@@ -19,6 +19,10 @@ import { IconCard } from "@/components/icon-card";
 import { SmallCard } from "@/components/small-card";
 import Link from "next/link";
 import { useFetch } from "usehooks-ts";
+import { BlogPostCard } from "@/components/blog-post-card"
+import { getFeedItems } from "@/lib/rss"
+import type { RSSFeedItem } from "@/types/RSSFeedItem";
+import { ArrowRight } from "lucide-react";
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
@@ -72,6 +76,11 @@ const ListRole = React.forwardRef<
 ListRole.displayName = "ListRole";
 
 export default function Home() {
+  const blogUrl = process.env.NEXT_PUBLIC_BLOG_URL;
+  if (!blogUrl) {
+    throw new Error("NEXT_PUBLIC_BLOG_URL is not set");
+  }
+
   const designProject = allProjects.filter(
     (project) => project.title === "Educational AI K-12 Games"
   )[0];
@@ -126,6 +135,12 @@ export default function Home() {
     "https://api.github.com/repos/ElliotRoe/elliotbroe.com/commits?per_page=1";
 
   const { data, error } = useFetch<CommitInfo[]>(repoCommitApiUrl);
+
+  const [posts, setPosts] = useState<RSSFeedItem[]>([]);
+
+  useEffect(() => {
+    getFeedItems().then(setPosts);
+  }, []);
 
   return (
     <div className="prose dark:prose-invert space-y-6 flex flex-col items-center w-full h-full pb-10">
@@ -183,8 +198,19 @@ export default function Home() {
         />
       </div>
       <Link href="/experiences">
-        <Button>All Experiences</Button>
+        <Button variant="outline" className="rounded-full">All Experiences <ArrowRight className="ml-2 h-4 w-4" /></Button>
       </Link>
-    </div>
+      <div className="flex flex-col items-center">
+        <h1 className="text-4xl font-bold mb-8 mt-12">Blog Posts</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.map((post) => (
+            <BlogPostCard key={post.guid} post={post} />
+          ))}
+        </div>
+        <Link href={blogUrl} target="_blank" rel="noopener noreferrer">
+          <Button variant="outline" className="rounded-full mt-6">Blog <ArrowRight className="ml-2 h-4 w-4" /></Button>
+        </Link>
+      </div>
+    </div>  
   );
 }
