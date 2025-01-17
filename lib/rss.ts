@@ -16,4 +16,4 @@ export async function getFeedItems(): Promise<RSSFeedItem[]> {
   }
   
   return response.json();
-} 
+}
