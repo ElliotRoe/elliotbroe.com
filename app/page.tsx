@@ -120,13 +120,15 @@ export default function Home() {
   );
 
   const highlightOrganizaitons = [
+    "Verse",
     "BX Coding",
     "Play and Learn Lab",
     "Honeywell",
-    "The Technique",
   ];
   const highlightedExperiences = allExperiences.filter((experience) =>
     highlightOrganizaitons.includes(experience.organization)
+  ).sort((a, b) => 
+    highlightOrganizaitons.indexOf(a.organization) - highlightOrganizaitons.indexOf(b.organization)
   );
 
   const aboutArticle = allPages.filter((page) => page.title === "About")[0];
@@ -182,7 +184,7 @@ export default function Home() {
           className="col-span-2 row-span-2"
           experience={highlightedExperiences[0]}
           featurePhoto="/bxcoding-feature.png"
-          content="Co-founded BX Coding, a 501(c)(3) non-profit with a mission of increasing computing education accessibility"
+          content="Building Verse, with my partner in crime, Duncan Johnson. Assignments your students can talk to. Creating Sunny, the talking egg 🍳"
         />
         <IconCard
           className="col-span-1 row-span-3"
