@@ -62,9 +62,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={`antialiased min-h-screen bg-dotted dark:bg-slate-950 text-slate-900 dark:text-slate-50 ${inter.className}`}
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <div className="mx-auto w-screen h-screen p-5 max-w-5xl">
-            <header>
-              <div className="flex items-center justify-between">
+          <div className="mx-auto w-full min-h-screen max-w-5xl px-0 py-3 sm:w-screen sm:h-screen sm:p-5">
+            <header className="px-3 sm:px-0">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex flex-row">
                   <ModeToggle />
                   <GithubButton />
@@ -73,7 +73,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <MainMenu />
               </div>
             </header>
-            <main>{children}</main>
+            <main className="w-full">{children}</main>
           </div>
           <Analytics />
         </ThemeProvider>

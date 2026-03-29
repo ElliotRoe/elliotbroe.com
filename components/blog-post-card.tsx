@@ -3,29 +3,48 @@ import { Badge } from "@/components/ui/badge"
 import { Calendar } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import type { RSSFeedItem } from "@/types/RSSFeedItem"
 
 interface BlogPostCardProps {
-  post: RSSFeedItem
+  post: BlogCardPost
+}
+
+export interface BlogCardPost {
+  id: string
+  title: string
+  link: string
+  pubDate: string
+  creator: string
+  categories: string[]
+  contentEncoded?: string
+  isExternal: boolean
 }
 
 const extractFirstImage = (content: string): string | undefined => {
-  const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
-  return imgMatch?.[1];
-};
+  const imgMatch = content.match(/<img[^>]+src="([^">]+)"/)
+  return imgMatch?.[1]
+}
 
 export function BlogPostCard({ post }: BlogPostCardProps) {
-  const formattedDate = new Date(post.pubDate).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+  const formattedDate = new Date(post.pubDate).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   })
 
-  const imageUrl = extractFirstImage(post['content:encoded']);
+  const imageUrl = post.contentEncoded
+    ? extractFirstImage(post.contentEncoded)
+    : undefined
+
+  const linkProps = post.isExternal
+    ? {
+        target: "_blank" as const,
+        rel: "noopener noreferrer",
+      }
+    : {}
 
   return (
     <Card className="flex flex-col overflow-hidden hover:shadow-lg transition-shadow">
-      <Link href={post.link} target="_blank">
+      <Link href={post.link} {...linkProps}>
         {imageUrl && (
           <div className="relative w-full h-48">
             <Image

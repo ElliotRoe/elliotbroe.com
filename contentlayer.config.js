@@ -1,5 +1,10 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files"
+import remarkGfm from "remark-gfm"
+import rehypeSlug from "rehype-slug"
+import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import rehypePrettyCode from "rehype-pretty-code"
 import { organizations, skills, tags } from "./resume.config"
+import rehypeObsidianCallouts from "./lib/rehype-obsidian-callouts.js"
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
@@ -131,4 +136,19 @@ export const Experience = defineDocumentType(() => ({
 export default makeSource({
   contentDirPath: "./content",
   documentTypes: [Post, Page, Project, Experience],
+  mdx: {
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [
+      rehypeSlug,
+      [rehypeAutolinkHeadings, { behavior: "append" }],
+      [
+        rehypePrettyCode,
+        {
+          theme: "min-light",
+          keepBackground: false,
+        },
+      ],
+      rehypeObsidianCallouts,
+    ],
+  },
 })

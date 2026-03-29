@@ -11,7 +11,7 @@ import { CommitInfo, cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { LinkHover } from "@/components/link-hover";
 import { Separator } from "@/components/ui/separator";
 import { WideCard } from "@/components/wide-card";
@@ -19,7 +19,7 @@ import { IconCard } from "@/components/icon-card";
 import { SmallCard } from "@/components/small-card";
 import Link from "next/link";
 import { useFetch } from "usehooks-ts";
-import { BlogPostCard } from "@/components/blog-post-card"
+import { BlogPostCard, type BlogCardPost } from "@/components/blog-post-card"
 import { getFeedItems } from "@/lib/rss"
 import type { RSSFeedItem } from "@/types/RSSFeedItem";
 import { ArrowRight } from "lucide-react";
@@ -76,11 +76,6 @@ const ListRole = React.forwardRef<
 ListRole.displayName = "ListRole";
 
 export default function Home() {
-  const blogUrl = process.env.NEXT_PUBLIC_BLOG_URL;
-  if (!blogUrl) {
-    throw new Error("NEXT_PUBLIC_BLOG_URL is not set");
-  }
-
   const designProject = allProjects.filter(
     (project) => project.title === "Educational AI K-12 Games"
   )[0];
@@ -102,9 +97,9 @@ export default function Home() {
   );
   const build = (
     <LinkHover
-      href={"https://prompt-ed.org"}
-      description={buildProject.title}
-      icon={buildProject.icon}
+      href={"https://www.validin.com"}
+      description={'Software Engineer at Validin'}
+      icon={'/icons/validin-icon.jpg'}
     >
       build
     </LinkHover>
@@ -138,14 +133,60 @@ export default function Home() {
 
   const { data, error } = useFetch<CommitInfo[]>(repoCommitApiUrl);
 
-  const [posts, setPosts] = useState<RSSFeedItem[]>([]);
+  const [rssPosts, setRssPosts] = useState<RSSFeedItem[]>([]);
 
   useEffect(() => {
-    getFeedItems().then(setPosts);
+    getFeedItems()
+      .then(setRssPosts)
+      .catch((fetchError) => {
+        console.error("Failed to fetch Medium RSS posts", fetchError);
+      });
   }, []);
 
+  const posts = useMemo(() => {
+    const normalizeTitle = (value: string) => value.trim().toLowerCase();
+    const toTimestamp = (value: string) => {
+      const parsed = Date.parse(value);
+      return Number.isNaN(parsed) ? 0 : parsed;
+    };
+
+    const localBlogPosts: BlogCardPost[] = allPosts.map((post) => ({
+      id: post.slug,
+      title: post.title,
+      link: post.slug,
+      pubDate: post.date,
+      creator: "Elliot Roe",
+      categories: ["On-site"],
+      isExternal: false,
+    }));
+
+    const localTitles = new Set(
+      localBlogPosts.map((post) => normalizeTitle(post.title))
+    );
+
+    const mediumPosts: BlogCardPost[] = rssPosts
+      .filter((post) => !localTitles.has(normalizeTitle(post.title)))
+      .map((post) => ({
+        id: post.guid || post.link,
+        title: post.title,
+        link: post.link,
+        pubDate: post.isoDate || post.pubDate || post.updated,
+        creator: post.creator || "Medium",
+        categories:
+          post.categories && post.categories.length > 0
+            ? post.categories
+            : ["Medium"],
+        contentEncoded: post["content:encoded"] || post["content.encoded"],
+        isExternal: true,
+      }));
+
+    return [...localBlogPosts, ...mediumPosts].sort(
+      (a, b) => toTimestamp(b.pubDate) - toTimestamp(a.pubDate)
+    );
+  }, [rssPosts]);
+
   return (
-    <div className="prose dark:prose-invert space-y-6 flex flex-col items-center w-full h-full pb-10">
+    <div className="prose max-w-none dark:prose-invert space-y-6 flex flex-col items-center w-full h-full pb-10">
       <div className="my-5">
         <div className="flex flex-row card bg-background max-w-[580px] mx-auto">
           <div className="w-[250px] relative -left-7 max-sm:hidden">
@@ -206,10 +247,10 @@ export default function Home() {
         <h1 className="text-4xl font-bold mb-8 mt-12">Blog Posts</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((post) => (
-            <BlogPostCard key={post.guid} post={post} />
+            <BlogPostCard key={post.id} post={post} />
           ))}
         </div>
-        <Link href={blogUrl} target="_blank" rel="noopener noreferrer">
+        <Link href="/posts">
           <Button variant="outline" className="rounded-full mt-6">Blog <ArrowRight className="ml-2 h-4 w-4" /></Button>
         </Link>
       </div>

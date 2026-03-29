@@ -43,19 +43,21 @@ const navigationOptions: {
 
 export function MainMenu() {
   return (
-    <NavigationMenu className="card">
-      <NavigationMenuList>
+    <NavigationMenu className="card w-full max-w-full overflow-x-auto sm:w-auto sm:max-w-max sm:overflow-visible">
+      <NavigationMenuList className="w-full justify-start sm:w-auto sm:justify-center">
         {navigationOptions.map((option, i, arr) => (
           <>
             <NavigationMenuItem key={i}>
               <Link href={option.href} legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink
+                  className={`${navigationMenuTriggerStyle()} h-9 px-2 text-xs sm:h-10 sm:px-4 sm:text-sm`}
+                >
                   {option.title}
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             {i < arr.length - 1 && (
-              <Separator orientation="vertical" className="h-4" />
+              <Separator orientation="vertical" className="hidden h-4 sm:block" />
             )}
           </>
         ))}
