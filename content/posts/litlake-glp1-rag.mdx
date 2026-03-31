@@ -83,7 +83,7 @@ Each `.xml.gz` file represents a slice of their data in an XML format. Reading o
 </PubmedArticle>
 ```
 
-While quite detailed, the structure of individual XML PubmedArticle objects are deeply nested, meaning we'll need to create a quick script that can take a stream of XML objects and output normalized JSON objects with only the fields that we actually care about. In addition to this transformation, we'll need to make sure we only grab PubMed abstracts that are actually present within the PMC open access set. Fortunately, PMC hosts csv files that contain this information. We can use this list of about 7 million articles as an additional input to our script as another pre-screening step. The full command I ran to produce this output is as follows:
+While quite detailed, the structure of individual XML PubmedArticle objects are deeply nested, meaning we'll need to create a quick script that can take a stream of XML objects and output normalized JSON objects with only the fields that we actually care about. In addition to this transformation, we'll need to make sure we only grab PubMed abstracts that are actually present within the PMC open access set. Fortunately, PMC hosts csv files that contain this information. We can use this list of about 7 million articles as an additional input to our script as another pre-screening step. I created a quick script called [pmc_json_gen.py](https://gist.github.com/ElliotRoe/54dbb816cbdc3a5df29b331eb59ea1d6#file-pmc_json_gen-py) and ran it like so:
 
 ```bash
 uv run pmc_json_gen.py \
@@ -315,7 +315,7 @@ The tricky part is providing the correct context to the LLM dynamically and with
 
 ### What Are Embeddings, and How Are They Used?
 
-While embeddings can be used for many things, in this context, they are a vector representation of the semantic meaning of blocks of text. If you'd like to know more, please read [here](placeholder).
+While embeddings can be used for many things, in this context, they are a vector representation of the semantic meaning of blocks of text. If you'd like to know more, please read [here](https://www.geeksforgeeks.org/nlp/word-embeddings-in-nlp/).
 
 Within RAG systems, chunks of documents–like the pages of the Toyota owner's manual–are typically indexed via pre-computed embeddings. When a user asks a question, it's also turned into an embedding. Then, the geometric similarity is computed between the question's vector and all document vectors. From there, the top *n* most similar documents are selected and provided to the LLM as context for its answer.
 
@@ -465,7 +465,7 @@ I have several serious criticisms with this response, including the absolute lac
 
 ---
 
-If you're interested in poking around in the file yourself, check it out [here](placeholder)! You can grab the `litlake.py` script [here](placeholder).
+If you're interested in poking around in the file yourself, check it out [here](https://pub-27b01fa4480d4f4bb498d8562a2d8f0f.r2.dev/glp1.db)! You can grab the `litlake.py` script [here](https://gist.github.com/ElliotRoe/54dbb816cbdc3a5df29b331eb59ea1d6#file-litlake-py).
 
 Great! That's it. See ya in the next one,
 
